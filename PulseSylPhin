@@ -1,0 +1,272 @@
+-- ====================================================================
+-- Pulse SCRIPT (TỰ ĐỘNG DỊCH TIẾNG VIỆT - KHÔNG HIỆN MENU CHỌN)
+-- ====================================================================
+
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Từ điển dịch thuật
+local Translations = {
+    ["pulsehub.gg"] = "Pulse SylPhin",
+    ["Eggs"] = "Trứng",
+    ["Pets"] = "Thú Cưng",
+    ["Shop"] = "Cửa Hàng",
+    ["Lab"] = "Phòng Thí Nghiệm",
+    ["Dr Scramble"] = "Tiến Sĩ Scramble",
+    ["Butterflies"] = "Sự Kiện Bướm",
+    ["Player"] = "Người Chơi",
+    ["ESP"] = "Giao Diện ESP",
+    ["Priority System"] = "Hệ Thống Ưu Tiên",
+    ["Settings"] = "Cài Đặt",
+    ["Info"] = "Thông Tin",
+
+    -- Tab Eggs (Trộm Trứng & Quản Lý)
+    ["Steal Eggs"] = "Trộm Trứng",
+    ["Areas"] = "Khu Vực",
+    ["Rarities"] = "Độ Hiếm",
+    ["Mutations"] = "Đột Biến",
+    ["Target Priority"] = "Ưu Tiên Mục Tiêu",
+    ["Top Value"] = "Giá Trị Cao Nhất",
+    ["Rarest"] = "Hiếm Nhất",
+    ["Lowest Value"] = "Giá Trị Thấp Nhất",
+    ["Biggest Size"] = "Kích Thước Lớn Nhất",
+    ["Auto Steal Selected"] = "Tự Trộm Loại Đã Chọn",
+    ["Auto Steal All"] = "Tự Trộm Tất Cả",
+    ["Auto Hit Stealers"] = "Tự Đánh Kẻ Trộm",
+    ["Travel Speed"] = "Tốc Độ Di Chuyển",
+    ["Minimum Income"] = "Thu Nhập Tối Thiểu",
+    ["Steal Big Eggs"] = "Trộm Trứng Lớn",
+    ["Auto Return to Base"] = "Tự Về Căn Cứ",
+    ["Anti Traps"] = "Chống Bẫy",
+    ["Leave Treadmill"] = "Rời Máy Chạy Bộ",
+    ["Wait Out Night"] = "Chờ Hết Ban Đêm",
+    ["Filter Alerts"] = "Cảnh Báo Bộ Lọc",
+    ["ESP Eggs"] = "ESP Trứng",
+    ["ESP Traps"] = "ESP Bẫy",
+
+    ["Server Hop"] = "Chuyển Server",
+    ["Auto Server Hop"] = "Tự Động Chuyển Server",
+    ["Hop Now"] = "Chuyển Server Ngay",
+    ["Max Players"] = "Số Người Tối Đa",
+    ["Join Small Server"] = "Vào Server Ít Người",
+
+    ["Egg Handling"] = "Quản Lý Trứng",
+    ["Auto Place Selected"] = "Tự Đặt Trứng Đã Chọn",
+    ["Auto Place All"] = "Tự Đặt Tất Cả Trứng",
+    ["Auto Hatch Ready"] = "Tự Ấp Trứng Sẵn Sàng",
+
+    -- Tab Pets (Pet & Dung Hợp)
+    ["Auto Equip Best Pets"] = "Tự Đeo Pet Mạnh Nhất",
+    ["Auto Fuse"] = "Tự Động Dung Hợp",
+    ["Auto Fuse Pets(Beta)"] = "Tự Dung Hợp Pet (Thử Nghiệm)",
+    ["Fuse Rarities"] = "Độ Hiếm Dung Hợp",
+    ["Fuse Mutations"] = "Đột Biến Dung Hợp",
+    ["Pick Group By"] = "Gom Nhóm Theo",
+    ["Highest Rarity"] = "Độ Hiếm Cao Nhất",
+    ["Lowest Rarity"] = "Độ Hiếm Thấp Nhất",
+    ["Never Fuse Mutated"] = "Không Dung Hợp Pet Đột Biến",
+    ["Never Fuse Equipped"] = "Không Dung Hợp Pet Đang Đeo",
+    ["Auto Complete Reveal"] = "Tự Mở Nhanh Kết Quả",
+    ["Maximum Scale to Fuse"] = "Kích Thước Tối Đa Để Dung Hợp",
+    ["Keep Per Pet Type"] = "Giữ Lại Mỗi Loại Pet",
+    ["Fuse Now"] = "Dung Hợp Ngay",
+
+    ["Auto Sell Pets"] = "Tự Bán Pet",
+    ["Sell Pets"] = "Bán Pet",
+    ["Auto Sell Eggs"] = "Tự Bán Trứng",
+    ["Sell Eggs"] = "Bán Trứng",
+    ["Earnings"] = "Thu Nhập",
+    ["Claim Offline Earnings"] = "Nhận Thu Nhập Offline",
+
+    -- Tab Shop (Nâng Cấp & Cửa Hàng)
+    ["Upgrades"] = "Nâng Cấp",
+    ["Auto Buy Upgrades"] = "Tự Mua Nâng Cấp",
+    ["Index"] = "Sách Mẫu (Index)",
+    ["Auto Claim Index"] = "Tự Nhận Thưởng Index",
+    ["Auto Claim Group Reward"] = "Tự Nhận Thưởng Nhóm",
+    ["Training"] = "Luyện Tập",
+    ["Auto Treadmill Training"] = "Tự Tập Máy Chạy Bộ",
+    ["Trails"] = "Vệt Di Chuyển (Trail)",
+    ["Auto Buy Trails"] = "Tự Mua Trail",
+    ["Auto Equip Best Trail"] = "Tự Đeo Trail Tốt Nhất",
+    ["Gear"] = "Trang Bị",
+    ["Auto Equip Best Gear"] = "Tự Đeo Đồ Tốt Nhất",
+
+    -- Tab Lab (Phòng Thí Nghiệm)
+    ["Automation"] = "Tự Động Hóa",
+    ["Auto trade eggs"] = "Tự Đổi Trứng",
+    ["Find missing eggs"] = "Tìm Trứng Còn Thiếu",
+    ["Auto refresh recipe"] = "Tự Làm Mới Công Thức",
+    ["Skip reward reveal"] = "Bỏ Qua Hiệu Ứng Nhận Thưởng",
+    ["Trade eggs now"] = "Đổi Trứng Ngay",
+    ["Claim reward"] = "Nhận Phần Thưởng",
+    ["Refresh recipe"] = "Làm Mới Công Thức",
+    ["Fly to Lab"] = "Bay Đến Phòng Thí Nghiệm",
+    ["Lab overview"] = "Tổng Quan Phòng Thí Nghiệm",
+    ["Minimum pty"] = "Độ Ưu Tiên Tối Thiểu",
+    ["Allowed egg rarities"] = "Độ Hiếm Trứng Cho Phép",
+
+    -- Tab Dr Scramble (Sự Kiện Dr Scramble)
+    ["Boss"] = "Trùm (Boss)",
+    ["Auto enter portal"] = "Tự Vào Cổng Dịch Chuyển",
+    ["Enter portal"] = "Vào Cổng Dịch Chuyển",
+    ["Auto fight boss"] = "Tự Đánh Boss",
+    ["Ignore hazards"] = "Bỏ Qua Chướng Cướng Vật",
+    ["Hit distance"] = "Khoảng Cách Đánh",
+    ["Quest"] = "Nhiệm Vụ",
+    ["Flight Speed"] = "Tốc Độ Bay",
+    ["Auto Complete Vault Quest"] = "Tự Hoàn Thành Nhiệm Vụ Kho",
+    ["Auto Collect Lost Parts"] = "Tự Nhặt Linh Kiện Mất",
+    ["Auto Open Vault"] = "Tự Mở Khóa Kho",
+    ["Event shop"] = "Cửa Hàng Sự Kiện",
+    ["Auto Buy Items"] = "Tự Mua Vật Phẩm",
+
+    -- Tab Butterflies (Bắt Bướm)
+    ["Butterfly Bloom"] = "Sự Kiện Bắt Bướm",
+    ["Auto catch butterflies"] = "Tự Động Bắt Bướm",
+    ["Butterflies to catch"] = "Loại Bướm Cần Bắt",
+    ["Fly there before start"] = "Bay Đến Trước Khi Bắt Đầu",
+    ["Return to base after"] = "Trở Về Căn Cứ Sau Khi Bắt",
+    ["Net & Essence"] = "Vợt & Tinh Chất",
+    ["Auto trade up"] = "Tự Đổi Tinh Chất Cấp Cao",
+    ["Keep enough for essence"] = "Giữ Đủ Cho Tinh Chất",
+    ["Auto craft essence"] = "Tự Chế Tạo Tinh Chất",
+    ["Apply essence now"] = "Sử Dụng Tinh Chất Ngay",
+    ["Visit tree now"] = "Đến Cây Ngay",
+
+    -- Tab Player (Nhân Vật)
+    ["Swing"] = "Tấn Công / Đánh Gậy",
+    ["Auto Swing"] = "Tự Động Đánh Gậy",
+    ["Prefer Egg Carriers"] = "Ưu Tiên Đánh Người Cầm Trứng",
+    ["Movement"] = "Di Chuyển",
+    ["Walk Speed Override"] = "Ghi Đè Tốc Độ Đi Bộ",
+    ["Walk Speed"] = "Tốc Độ Đi Bộ",
+    ["Speed method"] = "Chế Độ Tốc Độ",
+    ["Speed keybind"] = "Phím Tắt Tốc Độ",
+    ["Show Speed Bar"] = "Hiện Thanh Tốc Độ",
+    ["Jump Power Override"] = "Ghi Đè Lực Nhảy",
+    ["Jump Power"] = "Lực Nhảy",
+    ["NoClip"] = "Đi Xuyên Tường (NoClip)",
+    ["Fly"] = "Chế Độ Bay (Fly)",
+    ["Prompts"] = "Tương Tác",
+    ["Instant Prompts"] = "Tương Tác Tức Thì",
+    ["Enable Fly"] = "Bật Chế Độ Bay",
+
+    -- Tab ESP (Hiển Thị)
+    ["Carried and Dropped Egg ESP"] = "ESP Trứng Đang Cầm / Rơi",
+    ["Guard ESP"] = "ESP Bảo Vệ",
+    ["Pet ESP"] = "ESP Thú Cưng",
+    ["Machine ESP"] = "ESP Máy Móc",
+    ["Plot ESP"] = "ESP Căn Cứ",
+    ["Render Distance"] = "Khoảng Cách Hiển Thị",
+    ["Rare Egg Alerts"] = "Cảnh Báo Trứng Hiếm",
+    ["Alert Mutations"] = "Cảnh Báo Đột Biến",
+    ["Player ESP"] = "ESP Người Chơi",
+    ["Enable player ESP"] = "Bật ESP Người Chơi",
+    ["Account username"] = "Tên Tài Khoản",
+    ["Player name"] = "Tên Người Chơi",
+    ["Player distance"] = "Khoảng Cách Người Chơi",
+    ["Current zone"] = "Khu Vực Hiện Tại",
+    ["Carried egg"] = "Trứng Đang Cầm",
+    ["Player outline"] = "Viền Người Chơi",
+    ["Base Egg ESP"] = "ESP Trứng Tại Căn Cứ",
+    ["Show my hatching eggs"] = "Hiện Trứng Đang Ấp Của Tôi",
+    ["What To Show"] = "Nội Dung Hiển Thị",
+
+    -- Tab Priority & Webhook
+    ["Task Order"] = "Thứ Tự Công Việc",
+    ["Webhook"] = "Thông Báo Webhook",
+    ["Enable Webhooks"] = "Bật Webhook",
+    ["Plug User ID"] = "ID Người Dùng Discord",
+    ["Summary Interval"] = "Khoảng Thời Gian Tóm Tắt",
+    ["List Spawned Eggs"] = "Liệt Kê Trứng Xuất Hiện",
+    ["Steal Alerts"] = "Cảnh Báo Trộm Trứng",
+    ["Send Test Post"] = "Gửi Tin Nhắn Thử",
+    ["Disconnect Alerts"] = "Cảnh Báo Mất Kết Nối",
+    ["Send Summary Now"] = "Gửi Tóm Tắt Ngay",
+
+    -- Tab Settings (Cài Đặt Hệ Thống)
+    ["Anti-AFK"] = "Chống Văng Game (AFK)",
+    ["Auto Execute"] = "Tự Động Chạy Script",
+    ["Unload"] = "Tắt Menu",
+    ["Interface appearance"] = "Giao Diện Hệ Thống",
+    ["Built-in theme"] = "Chủ Đề Có Sẵn",
+    ["Text color"] = "Màu Chữ",
+    ["Accent color"] = "Màu Nhấn",
+    ["Button color"] = "Màu Nút",
+    ["Control color"] = "Màu Điều Khiển",
+    ["Background color"] = "Màu Nền",
+    ["Font"] = "Phông Chữ",
+    ["Background image"] = "Ảnh Nền",
+    ["Remove background image"] = "Xóa Ảnh Nền",
+    ["Menu layout"] = "Bố Cục Menu",
+    ["Menu animations"] = "Hiệu Ứng Menu",
+    ["Corner Radius"] = "Độ Bo Góc",
+    ["Compact sidebar"] = "Thanh Bên Thu Gọn",
+    ["Sidebar width"] = "Độ Rộng Thanh Bên",
+    ["Window size"] = "Kích Thước Cửa Sổ",
+    ["Performance"] = "Hiệu Năng",
+    ["FPS Boost"] = "Tăng FPS (Giảm Lag)",
+    ["Auto Delete Own Pets"] = "Tự Xóa Pet Của Bản Thân",
+    ["FPS Cap"] = "Giới Hạn FPS",
+    ["Black Sky"] = "Màn Đêm Bầu Trời",
+    ["Configs"] = "Quản Lý Cấu Hình",
+    ["Config name"] = "Tên Cấu Hình",
+    ["Create config"] = "Tạo Cấu Hình",
+    ["Save config"] = "Lưu Cấu Hình",
+    ["Overwrite config"] = "Ghi Đè Cấu Hình",
+    ["Delete config"] = "Xóa Cấu Hình",
+    ["Refresh list"] = "Làm Mới Danh Sách",
+    ["Load config"] = "Tải Cấu Hình",
+
+    -- Các độ hiếm (Rarities)
+    ["Common"] = "Thường",
+    ["Uncommon"] = "Không Phổ Biến",
+    ["Rare"] = "Hiếm",
+    ["Epic"] = "Sử Thi",
+    ["Legendary"] = "Huyền Thoại",
+    ["Mythic"] = "Thần Thoại",
+    ["Cosmic"] = "Vũ Trụ",
+    ["Divine"] = "Thần Thánh",
+    ["Eternal"] = "Vĩnh Hằng",
+    ["Secret"] = "Bí Mật"
+}
+
+local function translateText(originalText)
+    if not originalText or originalText == "" then return originalText end
+    if Translations[originalText] then return Translations[originalText] end
+    local translated = originalText
+    for eng, vie in pairs(Translations) do
+        if string.find(translated, eng, 1, true) then
+            translated = string.gsub(translated, eng, vie)
+        end
+    end
+    return translated
+end
+
+local function applyTranslation(inst)
+    if inst:IsA("TextLabel") or inst:IsA("TextButton") or inst:IsA("TextBox") then
+        local currentText = inst.Text
+        local newText = translateText(currentText)
+        if newText ~= currentText then inst.Text = newText end
+        inst:GetPropertyChangedSignal("Text"):Connect(function()
+            local textNow = inst.Text
+            local translatedNow = translateText(textNow)
+            if translatedNow ~= textNow then inst.Text = translatedNow end
+        end)
+    end
+end
+
+-- Kích hoạt bộ quét và chuyển đổi ngôn ngữ
+for _, child in ipairs(CoreGui:GetDescendants()) do applyTranslation(child) end
+if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") then
+    for _, child in ipairs(LocalPlayer.PlayerGui:GetDescendants()) do applyTranslation(child) end
+end
+CoreGui.DescendantAdded:Connect(applyTranslation)
+if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") then
+    LocalPlayer.PlayerGui.DescendantAdded:Connect(applyTranslation)
+end
+
+-- Tải trực tiếp script BigFroot gốc
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PulseZax/Loader/refs/heads/main/.lua"))()
