@@ -23,6 +23,15 @@ local Translations = {
     ["Info"] = "Thông Tin",
 
     -- Tab Eggs (Trộm Trứng & Quản Lý)
+    ["Auto Steal"] = "Tự Động Trộm",
+    ["OFF"] = "Tắt",
+    ["ON"] = "Bật",
+    ["Steal"] = "Trộm",
+    ["Sort"] = "Ưu Tiên",
+    ["Value"] = "Giá Trị",
+    ["Tween Speed"] = "Tốc Độ Chạy",
+    ["Walk speed"] = "Tốc Độ Đi",
+    ["Speed Bar"] = "Thanh Tăng tốc",
     ["Steal Eggs"] = "Trộm Trứng",
     ["Areas"] = "Khu Vực",
     ["Rarities"] = "Độ Hiếm",
@@ -270,6 +279,9 @@ local Translations = {
     ["Delete config"] = "Xóa Cấu Hình",
     ["Refresh list"] = "Làm Mới Danh Sách",
     ["Load config"] = "Tải Cấu Hình",
+    ["Set as autoload"] = "Thiết lập tự động tải cấu hình",
+    ["Config"] = "Cấu Hình",
+    ["Not set"] = "chưa chọn",
 
     -- Các độ hiếm (Rarities)
     ["Common"] = "Thường",
