@@ -9,8 +9,8 @@ local LocalPlayer = Players.LocalPlayer
 -- Từ điển dịch thuật
 local Translations = {
     ["pulsehub.gg"] = "Pulse SylPhin",
-    ["selected"] = "Trứng",
-    ["Eggs"] = "đã chọn",
+    ["selected"] = "đã chọn",
+    ["Eggs"] = "Trứng",
     ["Pets"] = "Thú Cưng",
     ["Shop"] = "Cửa Hàng",
     ["Lab"] = "Phòng Thí Nghiệm",
@@ -150,6 +150,7 @@ local Translations = {
     ["Keep enough for essence"] = "Giữ Đủ Cho Tinh Chất",
     ["Auto craft essence"] = "Tự Chế Tạo Tinh Chất",
     ["Auto apply essence"] = "Tự Động Sử Dụng Tinh Chất",
+    ["Apply essence now"] = "Sử Dụng Tinh Chất Ngay",
     ["Visit tree now"] = "Đến Cây Ngay",
     ["Next Bloom"] = "Bloom Tiếp Theo",
     ["locked"] = "đã khóa",
@@ -199,6 +200,30 @@ local Translations = {
     ["Base Egg ESP"] = "ESP Trứng Tại Căn Cứ",
     ["Show my hatching eggs"] = "Hiện Trứng Đang Ấp Của Tôi",
     ["What To Show"] = "Nội Dung Hiển Thị",
+    -- Bổ sung từ Hình 1 (Base Egg ESP & ESP Settings)
+    ["Pet name"] = "Tên Thú Cưng",
+    ["Egg rarity"] = "Độ Hiếm Trứng",
+    ["Egg weight"] = "Trọng Lượng Trứng",
+    ["Pet income"] = "Thu Nhập Thú Cưng",
+    ["Egg mutations"] = "Đột Biến Trứng",
+    ["Pet icon"] = "Biểu Tượng Thú Cưng",
+    ["Egg distance"] = "Khoảng Cách Trứng",
+    ["Hatch status"] = "Trạng Thái Ấp",
+    ["Only eggs ready to hatch"] = "Chỉ Trứng Sẵn Sàng Ấp",
+    ["Egg label size"] = "Kích Thước Nhãn Trứng",
+    ["Base egg ESP distance"] = "Khoảng Cách ESP Trứng Căn Cứ",
+    ["Base egg Giao Diện ESP distance"] = "Khoảng Cách ESP Trứng Căn Cứ",
+
+    -- Bổ sung từ Hình 2 (What To Show / ESP Items)
+    ["Pet Name"] = "Tên Thú Cưng",
+    ["Rarity"] = "Độ Hiếm",
+    ["Weight"] = "Trọng Lượng",
+    ["Income"] = "Thu Nhập",
+    ["Distance"] = "Khoảng Cách",
+    ["Pet Icon"] = "Biểu Tượng Thú Cưng",
+    ["Mutations"] = "Đột Biến",
+    ["Only Mutated"] = "Chỉ Hàng Đột Biến",
+    ["Outline"] = "Viền Hiển Thị",
 
     -- Tab Priority & Webhook
     ["Task Order"] = "Thứ Tự Công Việc",
